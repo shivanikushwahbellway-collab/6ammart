@@ -21,20 +21,38 @@ export class BannerController {
     @Headers('x-all-zone-service') allZoneServiceStr?: string,
   ) {
     if (!zoneIdHeader) {
-      throw new BadRequestException([
-        { code: 'zoneId', message: 'Zone ID is required' },
-      ]);
+      throw new BadRequestException({
+        status: false,
+        message: 'Zone ID is required',
+         null,
+      });
     }
 
-    const zoneIds = JSON.parse(zoneIdHeader);
+    let zoneIds: string[];
+    try {
+      zoneIds = JSON.parse(zoneIdHeader);
+    } catch (e) {
+      throw new BadRequestException({
+        status: false,
+        message: 'Invalid zoneId header format. Expected JSON array.',
+         null,
+      });
+    }
+
     const currentModule = moduleId
       ? {
           id: moduleId,
           all_zone_service: allZoneServiceStr === 'true',
         }
-      : null;
+      : undefined;
 
-    return this.bannerService.getBanners(zoneIds, dto.featured, currentModule ?? undefined);
+    const bannersData = await this.bannerService.getBanners(zoneIds, dto.featured, currentModule);
+
+    return {
+      status: true,
+      message: 'Banners and campaigns fetched successfully',
+       bannersData,
+    };
   }
 
   @Get('/store/:store_id')
@@ -45,19 +63,37 @@ export class BannerController {
     @Headers('x-all-zone-service') allZoneServiceStr?: string,
   ) {
     if (!zoneIdHeader) {
-      throw new BadRequestException([
-        { code: 'zoneId', message: 'Zone ID is required' },
-      ]);
+      throw new BadRequestException({
+        status: false,
+        message: 'Zone ID is required',
+         null,
+      });
     }
 
-    const zoneIds = JSON.parse(zoneIdHeader);
+    let zoneIds: string[];
+    try {
+      zoneIds = JSON.parse(zoneIdHeader);
+    } catch (e) {
+      throw new BadRequestException({
+        status: false,
+        message: 'Invalid zoneId header format. Expected JSON array.',
+         null,
+      });
+    }
+
     const currentModule = moduleId
       ? {
           id: moduleId,
           all_zone_service: allZoneServiceStr === 'true',
         }
-      : null;
+      : undefined;
 
-      return this.bannerService.getStoreBanners(zoneIds, storeId, currentModule ?? undefined);
+    const banners = await this.bannerService.getStoreBanners(zoneIds, storeId, currentModule);
+
+    return {
+      status: true,
+      message: 'Store banners fetched successfully',
+       banners,
+    };
   }
 }

@@ -9,7 +9,7 @@ import { ModuleModule } from './module/module.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://shivanikushwahbellway_db_user:bellway@cluster0.lgnzv6u.mongodb.net/'),
+    MongooseModule.forRoot('altas_connection'),
     BannerModule,
     ZoneModule,
     AuthModule,

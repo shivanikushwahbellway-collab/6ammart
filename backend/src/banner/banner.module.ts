@@ -1,3 +1,4 @@
+// src/banner/banner.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BannerController } from './banner.controller';
@@ -9,11 +10,9 @@ import { CacheModule } from '@nestjs/cache-manager';
   imports: [
     MongooseModule.forFeature([
       { name: Banner.name, schema: BannerSchema },
-      { name: 'Zone', schema: 'ZoneSchema' },
-      { name: 'Module', schema: 'ModuleSchema' },
-      { name: 'Store', schema: 'StoreSchema' }
+      // ❌ Zone, Module, Store schemas REMOVED
     ]),
-    CacheModule.register()
+    CacheModule.register(),
   ],
   controllers: [BannerController],
   providers: [BannerService],
