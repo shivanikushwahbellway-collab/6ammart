@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-
 @Schema({ collection: 'email_verifications' })
 export class EmailVerification {
   @Prop({ required: true, unique: true })
@@ -14,3 +13,4 @@ export class EmailVerification {
 export type EmailVerificationDocument = EmailVerification & Document;
 
 export const EmailVerificationSchema = SchemaFactory.createForClass(EmailVerification);
+

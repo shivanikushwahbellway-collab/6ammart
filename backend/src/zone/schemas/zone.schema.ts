@@ -61,4 +61,4 @@ export class Zone {
 }
 
 export const ZoneSchema = SchemaFactory.createForClass(Zone);
-ZoneSchema.index({ coordinates: '2dsphere' }); // ⚡ Essential for geospatial queries
+ZoneSchema.index({ coordinates: '2dsphere' }); //

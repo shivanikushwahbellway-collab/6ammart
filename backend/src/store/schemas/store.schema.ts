@@ -10,6 +10,8 @@ export class Store {
   zone_id: Types.ObjectId;
 
   // ... other fields
+  @Prop({ type: [Types.ObjectId], ref: 'Store' })
+  store_ids: Types.ObjectId[];
 }
 export const StoreSchema = SchemaFactory.createForClass(Store);
 export type StoreDocument = Store & Document;
