@@ -32,4 +32,3 @@ export class PhoneVerification {
 }
 
 export const PhoneVerificationSchema = SchemaFactory.createForClass(PhoneVerification);
-

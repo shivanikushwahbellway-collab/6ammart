@@ -94,7 +94,7 @@ export class AuthService {
 
       return {
         status: true,
-        message: 'User registered successfully ✅',
+        message: 'User registered successfully ',
         data: {
           token,
           is_phone_verified: isPhoneVerified,
