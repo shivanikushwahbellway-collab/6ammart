@@ -11,6 +11,5 @@ export class Store {
 
   // ... other fields
 }
-
 export const StoreSchema = SchemaFactory.createForClass(Store);
 export type StoreDocument = Store & Document;
