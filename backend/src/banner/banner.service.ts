@@ -18,12 +18,12 @@ export class BannerService {
     currentModule?: { id: string; all_zone_service: boolean },
   ) {
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds }, // ✅ Direct string match
+      zone_id: { $in: zoneIds },
       is_active: true,
     };
 
-    // Support both ?featured=1 and ?featured=true
-    if (['1', 'true'].includes(featured)) {
+    // ✅ Fixed: Check if `featured` is not undefined before using `.includes()`
+    if (featured !== undefined && ['1', 'true'].includes(featured)) {
       bannerQuery.featured = true;
     }
 
@@ -34,7 +34,6 @@ export class BannerService {
     const banners = await this.bannerModel.find(bannerQuery).lean();
 
     return {
-      // campaigns: [], // removed as per your setup
       banners,
     };
   }
@@ -46,11 +45,13 @@ export class BannerService {
   ) {
     const cacheKey = `banners_store_${zoneIds.join('_')}_${storeId}_${currentModule?.id || 'default'}`;
     const cached = await this.cacheManager.get(cacheKey);
-    if (cached) return cached;
+    if (cached) {
+      return cached;
+    }
 
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds }, // ✅ string
-      data: storeId,             // assuming data = store_id (string)
+      zone_id: { $in: zoneIds },
+      data: storeId,
       created_by: 'store',
       is_active: true,
     };
@@ -60,7 +61,7 @@ export class BannerService {
     }
 
     const banners = await this.bannerModel.find(bannerQuery).lean();
-    await this.cacheManager.set(cacheKey, banners, 20 * 60 * 1000); // 20 mins
+    await this.cacheManager.set(cacheKey, banners, 20 * 60 * 1000); // 20 minutes
     return banners;
   }
 }
