@@ -17,29 +17,29 @@ export class ForgotPasswordController {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
-
-  @Post('forgot-password')
-  async forgotPassword(@Body('phone') phone: string) {
-    if (!phone) {
-      throw new BadRequestException('Phone number is required');
-    }
-
-    const user = await this.userModel.findOne({ phone }).exec();
-    if (!user) {
-      throw new HttpException('User not found with this phone number', HttpStatus.NOT_FOUND);
-    }
-
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
-    user.otp = otp;
-    user.otp_expires_at = new Date(Date.now() + 5 * 60 * 1000);
-    await user.save();
-
-    console.log(`[MOCK SMS] OTP ${otp} sent to ${phone}`);
-    return {
-      success: true,
-      message: 'OTP sent successfully',
-    };
+@Post('forgot-password')
+async forgotPassword(@Body('phone') phone: string) {
+  if (!phone) {
+    throw new BadRequestException('Phone number is required');
   }
+
+  const user = await this.userModel.findOne({ phone }).exec();
+  if (!user) {
+    throw new HttpException('User not found with this phone number', HttpStatus.NOT_FOUND);
+  }
+
+  const otp = Math.floor(1000 + Math.random() * 9000).toString();
+  user.otp = otp;
+  user.otp_expires_at = new Date(Date.now() + 5 * 60 * 1000);
+  await user.save();
+
+  // ✅ OTP ko response mein bhejo (sirf dev ke liye)
+  return {
+    success: true,
+    message: 'OTP sent successfully',
+    otp: otp, // 👈 ye line add karein
+  };
+}
 
   @Post('verify-otp')
   async verifyOtp(@Body('phone') phone: string, @Body('otp') otp: string) {

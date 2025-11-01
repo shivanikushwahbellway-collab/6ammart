@@ -36,10 +36,10 @@ let ForgotPasswordController = class ForgotPasswordController {
         user.otp = otp;
         user.otp_expires_at = new Date(Date.now() + 5 * 60 * 1000);
         await user.save();
-        console.log(`[MOCK SMS] OTP ${otp} sent to ${phone}`);
         return {
             success: true,
             message: 'OTP sent successfully',
+            otp: otp,
         };
     }
     async verifyOtp(phone, otp) {

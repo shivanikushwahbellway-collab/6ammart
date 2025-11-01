@@ -6,6 +6,7 @@ export declare class ForgotPasswordController {
     forgotPassword(phone: string): Promise<{
         success: boolean;
         message: string;
+        otp: string;
     }>;
     verifyOtp(phone: string, otp: string): Promise<{
         success: boolean;
