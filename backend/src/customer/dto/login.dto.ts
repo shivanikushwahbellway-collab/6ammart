@@ -11,9 +11,6 @@ export class LoginDto {
   @IsOptional()
   password?: string;
 
-  
-
-  // OTP
   @IsOptional()
   phone?: string;
 
