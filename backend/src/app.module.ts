@@ -8,12 +8,12 @@ import { ZoneModule } from './zone/zone.module';
 import { AuthModule } from './customer/auth.module';
 import { ModuleModule } from './module/module.module';
 import { HomeModule } from './home/home.module';
-import { SocialauthModule } from "./auth/socialauth/socialauth.module";
+
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }), // ✅ .env load karega
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -26,7 +26,6 @@ import { SocialauthModule } from "./auth/socialauth/socialauth.module";
     AuthModule,
     ModuleModule,
     HomeModule,
-    SocialauthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
