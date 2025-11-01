@@ -3,24 +3,24 @@ import { Document } from 'mongoose';
 
 export type BannerDocument = Banner & Document;
 
-@Schema()
+@Schema({ timestamps: true }) // optional: createdAt/updatedAt
 export class Banner {
-  @Prop()
+  @Prop({ type: String, required: true }) // ✅ Explicitly string
   zone_id: string;
 
-  @Prop()
+  @Prop({ type: String })
   module_id: string;
 
-  @Prop()
+  @Prop({ type: Boolean, default: true })
   is_active: boolean;
 
-  @Prop()
+  @Prop({ type: Boolean, default: false })
   featured: boolean;
 
-  @Prop()
-  data: string;
+  @Prop({ type: String, required: true }) // e.g., store_id or JSON string
+   string;
 
-  @Prop()
+  @Prop({ type: String, required: true })
   created_by: string;
 }
 

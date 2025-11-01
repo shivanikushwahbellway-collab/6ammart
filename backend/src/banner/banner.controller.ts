@@ -12,49 +12,46 @@ import { GetBannersDto } from './dto/get-banners.dto';
 @Controller('banner')
 export class BannerController {
   constructor(private bannerService: BannerService) {}
-
-  @Get('/list')
-  async getBanners(
-    @Headers('zoneId') zoneIdHeader: string,
-    @Query() dto: GetBannersDto,
-    @Headers('x-module-id') moduleId?: string,
-    @Headers('x-all-zone-service') allZoneServiceStr?: string,
-  ) {
-    if (!zoneIdHeader) {
-      throw new BadRequestException({
-        status: false,
-        message: 'Zone ID is required',
-         null,
-      });
-    }
-
-    let zoneIds: string[];
-    try {
-      zoneIds = JSON.parse(zoneIdHeader);
-    } catch (e) {
-      throw new BadRequestException({
-        status: false,
-        message: 'Invalid zoneId header format. Expected JSON array.',
-         null,
-      });
-    }
-
-    const currentModule = moduleId
-      ? {
-          id: moduleId,
-          all_zone_service: allZoneServiceStr === 'true',
-        }
-      : undefined;
-
-    const bannersData = await this.bannerService.getBanners(zoneIds, dto.featured, currentModule);
-
-    return {
-      status: true,
-      message: 'Banners and campaigns fetched successfully',
-       bannersData,
-    };
+@Get('/list')
+async getBanners(
+  @Headers('zoneId') zoneIdHeader: string,
+  @Query() dto: GetBannersDto,
+  @Headers('x-module-id') moduleId?: string,
+  @Headers('x-all-zone-service') allZoneServiceStr?: string,
+) {
+  if (!zoneIdHeader) {
+    throw new BadRequestException({
+      status: false,
+      message: 'Zone ID is required',
+    });
   }
 
+  let zoneIds: string[];
+  try {
+    zoneIds = JSON.parse(zoneIdHeader);
+  } catch (e) {
+    throw new BadRequestException({
+      status: false,
+      message: 'Invalid zoneId header format. Expected JSON array.',
+    });
+  }
+
+  const currentModule = moduleId
+    ? {
+        id: moduleId,
+        all_zone_service: allZoneServiceStr === 'true',
+      }
+    : undefined;
+
+  // ✅ Destructure directly
+  const { banners } = await this.bannerService.getBanners(zoneIds, dto.featured, currentModule);
+
+  return {
+    status: true,
+    message: 'Banners fetched successfully',
+    data: banners, // ✅ Now correct
+  };
+}
   @Get('/store/:store_id')
   async getStoreBanners(
     @Headers('zoneId') zoneIdHeader: string,
@@ -66,7 +63,6 @@ export class BannerController {
       throw new BadRequestException({
         status: false,
         message: 'Zone ID is required',
-         null,
       });
     }
 
@@ -77,7 +73,6 @@ export class BannerController {
       throw new BadRequestException({
         status: false,
         message: 'Invalid zoneId header format. Expected JSON array.',
-         null,
       });
     }
 
@@ -90,10 +85,11 @@ export class BannerController {
 
     const banners = await this.bannerService.getStoreBanners(zoneIds, storeId, currentModule);
 
-    return {
-      status: true,
-      message: 'Store banners fetched successfully',
-       banners,
-    };
+   // In getBanners(), update success response to match Laravel style
+return {
+  status: true,
+  message: 'Banners fetched successfully',
+  data: bannersData.banners, // ✅ "data" key, not "bannersData"
+};
   }
 }

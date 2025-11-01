@@ -1,4 +1,3 @@
-// src/banner/banner.service.ts
 import { Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -19,19 +18,23 @@ export class BannerService {
     currentModule?: { id: string; all_zone_service: boolean },
   ) {
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds },
+      zone_id: { $in: zoneIds }, // ✅ Direct string match
       is_active: true,
     };
-    if (featured === '1') {
+
+    // Support both ?featured=1 and ?featured=true
+    if (['1', 'true'].includes(featured)) {
       bannerQuery.featured = true;
     }
+
     if (currentModule) {
       bannerQuery.module_id = currentModule.id;
     }
+
     const banners = await this.bannerModel.find(bannerQuery).lean();
 
     return {
-      campaigns: [],
+      // campaigns: [], // removed as per your setup
       banners,
     };
   }
@@ -46,8 +49,8 @@ export class BannerService {
     if (cached) return cached;
 
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds },
-      data: storeId,
+      zone_id: { $in: zoneIds }, // ✅ string
+      data: storeId,             // assuming data = store_id (string)
       created_by: 'store',
       is_active: true,
     };
@@ -57,7 +60,7 @@ export class BannerService {
     }
 
     const banners = await this.bannerModel.find(bannerQuery).lean();
-    await this.cacheManager.set(cacheKey, banners, 20 * 60 * 1000);
+    await this.cacheManager.set(cacheKey, banners, 20 * 60 * 1000); // 20 mins
     return banners;
   }
 }
