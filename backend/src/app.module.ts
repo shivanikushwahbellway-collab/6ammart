@@ -8,7 +8,7 @@ import { ZoneModule } from './zone/zone.module';
 import { AuthModule } from './customer/auth.module';
 import { ModuleModule } from './module/module.module';
 import { HomeModule } from './home/home.module';
-
+import { SocialauthModule } from './auth/socialauth/socialauth.module';
 
 
 @Module({
@@ -26,6 +26,7 @@ import { HomeModule } from './home/home.module';
     AuthModule,
     ModuleModule,
     HomeModule,
+    SocialauthModule
   ],
   controllers: [AppController],
   providers: [AppService],

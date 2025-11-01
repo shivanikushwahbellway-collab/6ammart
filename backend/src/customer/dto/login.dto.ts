@@ -11,9 +11,7 @@ export class LoginDto {
   @IsOptional()
   password?: string;
 
-  @IsOptional()
-  @IsEnum(['phone', 'email'])
-  field_type?: 'phone' | 'email';
+  
 
   // OTP
   @IsOptional()
