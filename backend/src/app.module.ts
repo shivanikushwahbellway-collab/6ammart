@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { ZoneModule } from './zone/zone.module';
 import { AuthModule } from './customer/auth.module';
 import { ModuleModule } from './module/module.module';
+import { HomeModule } from './home/home.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ModuleModule } from './module/module.module';
     ZoneModule,
     AuthModule,
     ModuleModule,
+    HomeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
