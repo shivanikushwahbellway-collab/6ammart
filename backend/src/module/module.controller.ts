@@ -8,7 +8,7 @@ import {
 import type { Request } from 'express';
 import { ModuleService } from './module.service';
 
-@Controller('api/v1/modules')
+@Controller('modules')
 export class ModuleController {
   constructor(private readonly moduleService: ModuleService) {}
 
