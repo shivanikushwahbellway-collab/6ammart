@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'welcome to sindbad api';
+    return 'sidbad auth api is working';
   }
 }
