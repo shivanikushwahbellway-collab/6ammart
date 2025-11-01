@@ -7,10 +7,10 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import * as bcrypt from 'bcrypt';
-import { User, UserDocument } from '../Auth/schemas/user.schema';
-import { PhoneVerification } from '../Auth/schemas/phone-verification.schema';
-import { EmailVerification } from '../Auth/schemas/email-verification.schema';
-import { Guest } from '../Auth/schemas/guest.schema';
+import { User, UserDocument } from '../auth/schemas/user.schema';
+import { PhoneVerification } from '../auth/schemas/phone-verification.schema';
+import { EmailVerification } from '../auth/schemas/email-verification.schema';
+import { Guest } from '../auth/schemas/guest.schema';
 import { HttpStatus } from '@nestjs/common';
 
 @Injectable()

@@ -3,10 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt'
 import { AuthService } from './auth.service';
-import { User, UserSchema } from '../Auth/schemas/user.schema';
-import { PhoneVerification, PhoneVerificationSchema } from '../Auth/schemas/phone-verification.schema';
-import { EmailVerification, EmailVerificationSchema } from '../Auth/schemas/email-verification.schema';
-import { Guest, GuestSchema } from '../Auth/schemas/guest.schema';
+import { User, UserSchema } from '../auth/schemas/user.schema';
+import { PhoneVerification, PhoneVerificationSchema } from '../auth/schemas/phone-verification.schema';
+import { EmailVerification, EmailVerificationSchema } from '../auth/schemas/email-verification.schema';
+import { Guest, GuestSchema } from '../auth/schemas/guest.schema';
 @Module({
   imports: [
     // ✅ Add JwtModule here
