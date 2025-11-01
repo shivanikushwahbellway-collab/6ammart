@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
+import {Controller, Post, Body, HttpException,HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema'; // ✅ UserDocument bhi import karein
@@ -40,7 +40,7 @@ export class SocialauthController {
       user: {
         id: user._id,
         email: user.email,
-        name: user.f_name,   // ✅ response mein "name" = f_name
+        name: user.f_name,
         image: user.image,
       },
     };

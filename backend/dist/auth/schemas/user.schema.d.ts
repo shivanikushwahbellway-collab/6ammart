@@ -11,6 +11,10 @@ export declare class User {
     social_id?: string;
     temp_token?: string;
     remember_token?: string;
+    otp?: string;
+    reset_token?: string;
+    reset_token_expires_at?: Date;
+    otp_expires_at?: Date;
     is_phone_verified: boolean;
     is_email_verified: boolean;
     interest?: string;

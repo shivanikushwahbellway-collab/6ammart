@@ -23,6 +23,10 @@ let User = class User {
     social_id;
     temp_token;
     remember_token;
+    otp;
+    reset_token;
+    reset_token_expires_at;
+    otp_expires_at;
     is_phone_verified;
     is_email_verified;
     interest;
@@ -79,6 +83,22 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], User.prototype, "remember_token", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], User.prototype, "otp", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], User.prototype, "reset_token", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Date)
+], User.prototype, "reset_token_expires_at", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Date)
+], User.prototype, "otp_expires_at", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ default: false }),
     __metadata("design:type", Boolean)

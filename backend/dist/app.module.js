@@ -18,6 +18,7 @@ const auth_module_1 = require("./customer/auth.module");
 const module_module_1 = require("./module/module.module");
 const home_module_1 = require("./home/home.module");
 const socialauth_module_1 = require("./auth/socialauth/socialauth.module");
+const forgot_password_module_1 = require("./auth/forgotpassword/forgot-password.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,7 +38,8 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             module_module_1.ModuleModule,
             home_module_1.HomeModule,
-            socialauth_module_1.SocialauthModule
+            socialauth_module_1.SocialauthModule,
+            forgot_password_module_1.ForgotPasswordModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

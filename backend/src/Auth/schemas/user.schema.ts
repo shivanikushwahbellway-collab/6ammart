@@ -1,8 +1,5 @@
-// src/user/schemas/user.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-
-// Use HydratedDocument for better typing
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -40,6 +37,19 @@ export class User {
 
   @Prop()
   remember_token?: string;
+
+  // 🔑 NEW: OTP fields for forgot password
+  @Prop()
+  otp?: string; // temporary OTP
+  // 🔑 Add these two lines in User class
+  @Prop()
+  reset_token?: string;
+
+  @Prop()
+  reset_token_expires_at?: Date;
+
+  @Prop()
+  otp_expires_at?: Date; // OTP expiry time
 
   // Verification Status
   @Prop({ default: false })
@@ -95,7 +105,7 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
-// Indexes for better query performance
+// Indexes
 UserSchema.index({ phone: 1 });
 UserSchema.index({ email: 1 });
 UserSchema.index({ ref_code: 1 });

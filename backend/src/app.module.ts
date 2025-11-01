@@ -9,7 +9,7 @@ import { AuthModule } from './customer/auth.module';
 import { ModuleModule } from './module/module.module';
 import { HomeModule } from './home/home.module';
 import { SocialauthModule } from './auth/socialauth/socialauth.module';
-
+import { ForgotPasswordModule } from './auth/forgotpassword/forgot-password.module';
 
 @Module({
   imports: [
@@ -26,7 +26,8 @@ import { SocialauthModule } from './auth/socialauth/socialauth.module';
     AuthModule,
     ModuleModule,
     HomeModule,
-    SocialauthModule
+    SocialauthModule,
+    ForgotPasswordModule,
   ],
   controllers: [AppController],
   providers: [AppService],
