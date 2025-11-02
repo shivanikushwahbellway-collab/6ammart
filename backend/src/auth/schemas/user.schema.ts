@@ -106,8 +106,5 @@ export class User {
 export const UserSchema = SchemaFactory.createForClass(User);
 
 // Indexes
-UserSchema.index({ phone: 1 });
-UserSchema.index({ email: 1 });
-UserSchema.index({ ref_code: 1 });
 UserSchema.index({ zone_id: 1 });
 UserSchema.index({ status: 1 });

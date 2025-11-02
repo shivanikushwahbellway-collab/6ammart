@@ -26,8 +26,15 @@ let BannerService = class BannerService {
         this.cacheManager = cacheManager;
     }
     async getBanners(zoneIds, featured, currentModule) {
+        let zoneObjectIds;
+        try {
+            zoneObjectIds = zoneIds.map(id => new mongoose_2.Types.ObjectId(id));
+        }
+        catch (error) {
+            throw new Error('Invalid zone ID format. Must be valid MongoDB ObjectId.');
+        }
         const bannerQuery = {
-            zone_id: { $in: zoneIds },
+            zone_id: { $in: zoneObjectIds },
             is_active: true,
         };
         if (featured !== undefined && ['1', 'true'].includes(featured)) {
@@ -47,8 +54,15 @@ let BannerService = class BannerService {
         if (cached) {
             return cached;
         }
+        let zoneObjectIds;
+        try {
+            zoneObjectIds = zoneIds.map(id => new mongoose_2.Types.ObjectId(id));
+        }
+        catch (error) {
+            throw new Error('Invalid zone ID format. Must be valid MongoDB ObjectId.');
+        }
         const bannerQuery = {
-            zone_id: { $in: zoneIds },
+            zone_id: { $in: zoneObjectIds },
             data: storeId,
             created_by: 'store',
             is_active: true,
