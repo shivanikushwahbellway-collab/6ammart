@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose'; // ✅ `Types` import kiya
 import type { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Banner, BannerDocument } from './schemas/banner.schema';
@@ -17,12 +17,19 @@ export class BannerService {
     featured?: string,
     currentModule?: { id: string; all_zone_service: boolean },
   ) {
+    // ✅ Convert string zone IDs to ObjectId
+    let zoneObjectIds: Types.ObjectId[];
+    try {
+      zoneObjectIds = zoneIds.map(id => new Types.ObjectId(id));
+    } catch (error) {
+      throw new Error('Invalid zone ID format. Must be valid MongoDB ObjectId.');
+    }
+
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds },
+      zone_id: { $in: zoneObjectIds }, // ✅ Now compares ObjectId
       is_active: true,
     };
 
-    // ✅ Fixed: Check if `featured` is not undefined before using `.includes()`
     if (featured !== undefined && ['1', 'true'].includes(featured)) {
       bannerQuery.featured = true;
     }
@@ -49,8 +56,16 @@ export class BannerService {
       return cached;
     }
 
+    // ✅ Convert string zone IDs to ObjectId
+    let zoneObjectIds: Types.ObjectId[];
+    try {
+      zoneObjectIds = zoneIds.map(id => new Types.ObjectId(id));
+    } catch (error) {
+      throw new Error('Invalid zone ID format. Must be valid MongoDB ObjectId.');
+    }
+
     const bannerQuery: any = {
-      zone_id: { $in: zoneIds },
+      zone_id: { $in: zoneObjectIds }, // ✅ ObjectId
       data: storeId,
       created_by: 'store',
       is_active: true,

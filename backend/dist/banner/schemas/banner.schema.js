@@ -11,22 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BannerSchema = exports.Banner = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 let Banner = class Banner {
     zone_id;
     module_id;
     is_active;
     featured;
-    string;
+    data;
     created_by;
 };
 exports.Banner = Banner;
 __decorate([
-    (0, mongoose_1.Prop)({ type: String, required: true }),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'Zone', required: true }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Banner.prototype, "zone_id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ type: String }),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ type: mongoose_2.Types.ObjectId, ref: 'Module' }),
+    __metadata("design:type", mongoose_2.Types.ObjectId)
 ], Banner.prototype, "module_id", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: Boolean, default: true }),
@@ -38,8 +39,8 @@ __decorate([
 ], Banner.prototype, "featured", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: String, required: true }),
-    __metadata("design:type", Object)
-], Banner.prototype, "string", void 0);
+    __metadata("design:type", String)
+], Banner.prototype, "data", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: String, required: true }),
     __metadata("design:type", String)

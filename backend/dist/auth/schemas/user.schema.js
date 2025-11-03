@@ -159,9 +159,6 @@ exports.User = User = __decorate([
     (0, mongoose_1.Schema)({ timestamps: true, collection: 'users' })
 ], User);
 exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
-exports.UserSchema.index({ phone: 1 });
-exports.UserSchema.index({ email: 1 });
-exports.UserSchema.index({ ref_code: 1 });
 exports.UserSchema.index({ zone_id: 1 });
 exports.UserSchema.index({ status: 1 });
 //# sourceMappingURL=user.schema.js.map

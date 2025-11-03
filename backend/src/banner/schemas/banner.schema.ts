@@ -1,15 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose'; // ✅ Types import kiya
 
 export type BannerDocument = Banner & Document;
 
-@Schema({ timestamps: true }) // optional: createdAt/updatedAt
+@Schema({ timestamps: true })
 export class Banner {
-  @Prop({ type: String, required: true }) // ✅ Explicitly string
-  zone_id: string;
+  @Prop({ type: Types.ObjectId, ref: 'Zone', required: true }) // ✅ ObjectId + reference
+  zone_id: Types.ObjectId;
 
-  @Prop({ type: String })
-  module_id: string;
+  @Prop({ type: Types.ObjectId, ref: 'Module' })
+  module_id: Types.ObjectId;
 
   @Prop({ type: Boolean, default: true })
   is_active: boolean;
@@ -18,7 +18,7 @@ export class Banner {
   featured: boolean;
 
   @Prop({ type: String, required: true }) // e.g., store_id or JSON string
-   string;
+  data: string;
 
   @Prop({ type: String, required: true })
   created_by: string;
