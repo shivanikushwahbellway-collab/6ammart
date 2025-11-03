@@ -40,7 +40,6 @@ async forgotPassword(@Body('phone') phone: string) {
     otp: otp, // 👈 ye line add karein
   };
 }
-
   @Post('verify-otp')
   async verifyOtp(@Body('phone') phone: string, @Body('otp') otp: string) {
     if (!phone || !otp) {
