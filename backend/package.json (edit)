@@ -1,0 +1,20 @@
+{
+  "name": "sindbad-api",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nest start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/mongoose": "^8.0.0",
+    "mongoose": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.0",
+    "jest": "^27.0.0",
+    "ts-jest": "^27.0.0",
+    "typescript": "^4.0.0"
+  }
+}

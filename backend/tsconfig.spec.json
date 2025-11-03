@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": ["jest", "node"],
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es2017", "dom"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.spec.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
