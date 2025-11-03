@@ -9,8 +9,6 @@ export class EmailVerification {
   @Prop({ required: true })
   token: string; // OTP
 }
-
 export type EmailVerificationDocument = EmailVerification & Document;
 
 export const EmailVerificationSchema = SchemaFactory.createForClass(EmailVerification);
-
